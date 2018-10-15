@@ -11,9 +11,10 @@ Email=yourmail@example.com
 DEV="eth0"
 #CONF END
 
+PATH=/sbin:/usr/sbin:$PATH
 date
 IPREX='([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])'
-ipcmd="/sbin/ip addr show";type ip >/dev/null 2>&1||ipcmd="/sbin/ifconfig"
+ipcmd="ip addr show";type ip >/dev/null 2>&1||ipcmd="ifconfig"
 DEVIP=$($ipcmd $DEV|grep -Eo "$IPREX"|head -n1)
 echo "[DEV IP]:$DEVIP"
 dnscmd="nslookup";type nslookup >/dev/null 2>&1||dnscmd="ping -c1"
